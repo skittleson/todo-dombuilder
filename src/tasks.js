@@ -12,23 +12,40 @@ import {
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
 
 export class Tasks {
-  constructor() {
+  /**
+   *
+   * @param {*} options
+   */
+  constructor(
+    options = {
+      externalTaskCallback: (task) => {},
+    }
+  ) {
+    this._options = options;
     this._ui = this._createUi();
   }
   get ui() {
+    // this._newTaskInput.focus();
     return this._ui;
   }
-
+  /**
+   * Add tasks
+   * @param {Array} tasks
+   */
+  add(tasks) {
+    if (Array.isArray(tasks) && typeof tasks[0] === "string") {
+      tasks.forEach((task) =>
+        this._tasksUl.append(this.listItemEditableComponent(task))
+      );
+    }
+  }
   _createUi() {
-    const tasksUl = ul({
-      className: "tasks-list",
-    });
-
+    let errorMsg;
     return div(
       {
         className: "task-container",
       },
-      (newTaskInput = input({
+      (this._newTaskInput = input({
         className: "task-container-new-task",
         minLength: 5,
         required: true,
@@ -36,18 +53,18 @@ export class Tasks {
         onkeydown: (keyDownEvent) => {
           switch (keyDownEvent.key) {
             case "Enter":
-              if (newTaskInput.validity.valid) {
-                tasksUl.prepend(
-                  listItemEditableComponent(newTaskInput.value, descriptionFunc)
+              if (this._newTaskInput.validity.valid) {
+                this._tasksUl.prepend(
+                  this.listItemEditableComponent(this._newTaskInput.value)
                 );
-                newTaskInput.value = "";
+                this._newTaskInput.value = "";
                 errorMsg.innerText = "";
               } else {
                 if (
-                  newTaskInput.validity.tooShort ||
-                  newTaskInput.validity.valueMissing
+                  this._newTaskInput.validity.tooShort ||
+                  this._newTaskInput.validity.valueMissing
                 ) {
-                  errorMsg.innerText = `Task description too short. Min length is ${newTaskInput.minLength}`;
+                  errorMsg.innerText = `Task description too short. Min length is ${this._newTaskInput.minLength}`;
                   return;
                 }
                 errorMsg.innerText = "unknown input error";
@@ -59,7 +76,9 @@ export class Tasks {
         },
       })),
       (errorMsg = makeElement("small")),
-      tasksUl,
+      (this._tasksUl = ul({
+        className: "tasks-list",
+      })),
       // After "Tab"ing to the end, go back to the beginning. (hacky?)
       input({
         style: {
@@ -68,7 +87,7 @@ export class Tasks {
         },
         onfocus: () => {
           // focus on checkbox
-          tasksUl.firstChild.firstChild.focus();
+          this._tasksUl.firstChild.firstChild.focus();
         },
       })
     );
@@ -78,7 +97,7 @@ export class Tasks {
    * @param {String} description
    * @returns {HTMLElement}
    */
-  listItemEditableComponent(description, keyboardActionCallback) {
+  listItemEditableComponent(description) {
     let editableDescription, staticDescription, taskCheckbox, taskLi;
     return (taskLi = li(
       {
@@ -98,7 +117,9 @@ export class Tasks {
               taskLi.firstChild.focus();
               break;
             case "d":
-              keyboardActionCallback(staticDescription.innerText);
+              this._options.externalTaskCallback({
+                description: staticDescription.innerText,
+              });
               break;
             case "Enter":
               staticDescription.click();
