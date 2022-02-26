@@ -32,7 +32,10 @@ const tasksUl = ul({
 });
 const pomodoroInstance = new Pomodoro();
 function mainUi(currentItems) {
-  let newTaskInput, helpDialog, errorMsg, pomodoroDialog;
+  let newTaskInput, helpDialog, errorMsg;
+  const descriptionFunc = function (description) {
+    pomodoroInstance.description = description;
+  };
   document.body.append(
     div(
       makeElement(
@@ -61,13 +64,7 @@ function mainUi(currentItems) {
             case "Enter":
               if (newTaskInput.validity.valid) {
                 tasksUl.prepend(
-                  listItemEditableComponent(
-                    newTaskInput.value,
-                    (description) => {
-                      pomodoroInstance.description = description;
-                      pomodoroDialog.showModal();
-                    }
-                  )
+                  listItemEditableComponent(newTaskInput.value, descriptionFunc)
                 );
                 newTaskInput.value = "";
                 errorMsg.innerText = "";
@@ -102,7 +99,7 @@ function mainUi(currentItems) {
       })
     ),
     (helpDialog = infoDialogUi()),
-    (pomodoroDialog = makeElement("dialog", pomodoroInstance.ui))
+    pomodoroInstance.ui
   );
   newTaskInput.focus();
 
@@ -115,7 +112,7 @@ function mainUi(currentItems) {
   };
   // Add existing items
   currentItems.forEach((item) =>
-    tasksUl.append(listItemEditableComponent(item))
+    tasksUl.append(listItemEditableComponent(item, descriptionFunc))
   );
 }
 

@@ -23,8 +23,8 @@ export class Pomodoro {
     return this._ui;
   }
 
-  set description(v) {
-    this._description = v;
+  set description(value) {
+    this._descriptionElement.innerText = value;
   }
 
   _createUi() {
@@ -33,7 +33,7 @@ export class Pomodoro {
     const uiOptions = div(
       makeElement("h2", "Pomodoro Timer"),
       ((timerDisplay = makeElement("h3")), "0m 0s"),
-      (this._descriptionElement = span("-")),
+      (this._descriptionElement = div("-")),
       div(
         (startStopToggle = button("Start", {
           className: "button",
