@@ -23,6 +23,9 @@ export class Pomodoro {
     return this._ui;
   }
 
+  /**
+   * @param {String} value
+   */
   set description(value) {
     this._descriptionElement.innerText = value;
   }
