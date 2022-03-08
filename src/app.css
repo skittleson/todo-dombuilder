@@ -1,0 +1,68 @@
+/*https://www.color-hex.com/color-palette/2609*/
+body,
+html,
+dialog {
+  background-color: #171917;
+  color: #ffffff;
+}
+body {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body,
+html,
+p,
+input,
+label,
+span {
+  font-family: "Inconsolata", monospace;
+}
+
+input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+}
+
+input:focus {
+  outline: none;
+}
+
+input,
+button {
+  background-color: #171917;
+  color: white;
+}
+.help-link {
+  float: right;
+  font-size: small;
+}
+.task-container {
+  margin: 2%;
+  width: 100%;
+  /* max-width: 600px; */
+}
+.task-container-new-task {
+  width: 100%;
+  font-size: 160%;
+}
+
+.tasks-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tasks-list-item {
+  padding-top: 1%;
+  border-bottom: 1px solid #555;
+}
+.tasks-list-item,
+.tasks-list-item > input {
+  font-size: 130%;
+  width: auto;
+}
+.tasks-list-item-focus {
+  border-left: 1px solid #6a6767;
+}

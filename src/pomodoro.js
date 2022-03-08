@@ -13,7 +13,7 @@ import {
 
 export class Pomodoro {
   constructor() {
-    this._ui = this._createUi();
+    this._createUi();
   }
 
   /**
@@ -23,23 +23,32 @@ export class Pomodoro {
     return this._ui;
   }
 
-  set description(v) {
-    this._description = v;
+  get hidden() {
+    return this._ui.hidden;
+  }
+
+  set hidden(value) {
+    this._ui.hidden = value;
+  }
+
+  /**
+   * @param {String} value
+   */
+  set description(value) {
+    this._descriptionElement.innerText = value;
   }
 
   _createUi() {
-    let intervalInput, timerDisplay, startStopToggle;
-
-    const uiOptions = div(
+    this._ui = div(
       makeElement("h2", "Pomodoro Timer"),
-      ((timerDisplay = makeElement("h3")), "0m 0s"),
-      (this._descriptionElement = span("-")),
+      ((this._timerDisplay = makeElement("h3")), "0m 0s"),
+      (this._descriptionElement = div("-")),
       div(
-        (startStopToggle = button("Start", {
+        (this._startStopToggle = button("Start", {
           className: "button",
         }))
       ),
-      (intervalInput = input({
+      (this._intervalInput = input({
         type: "number",
         step: 5,
         min: 5,
@@ -47,8 +56,6 @@ export class Pomodoro {
         value: 5,
       }))
     );
-
-    return uiOptions;
 
     // const c = new Date("July 18, 2023 23:30:20").getTime();
     // const uiRef = this._ui;
