@@ -32,9 +32,11 @@ const pomodoroInstance = new Pomodoro();
 const tasksInstance = new Tasks({
   externalTaskCallback: (task) => {
     pomodoroInstance.description = task.description;
+    pomodoroInstance.hidden = false;
   },
 });
 function mainUi(currentItems) {
+  pomodoroInstance.hidden = true;
   tasksInstance.add(currentItems);
   let helpDialog;
   document.body.append(

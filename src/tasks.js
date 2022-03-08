@@ -28,6 +28,15 @@ export class Tasks {
     // this._newTaskInput.focus();
     return this._ui;
   }
+
+  get hidden() {
+    return this._ui.hidden;
+  }
+
+  set hidden(value) {
+    this._ui.hidden = value;
+  }
+
   /**
    * Add tasks
    * @param {Array} tasks
