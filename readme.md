@@ -3,6 +3,6 @@
 ## Project Goals
 
 - [x] Keyboard friendly
+- [x] Desktop friendly
 - [] Pomodoro for tasks
 - [] Web friendly https://skittleson.github.io/todo-dombuilder
-- [] Desktop friendly - Download from release

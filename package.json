@@ -1,14 +1,15 @@
 {
   "name": "todo",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "keyboard friendly todo app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx http-server -c 0 --port 8095",
-    "estart": "electron ."
+    "estart": "electron .",
+    "build": "npx electron-builder --win portable"
   },
-  "author": "",
+  "author": "Spencer Kittleson",
   "license": "ISC",
   "dependencies": {
     "@kanmf/dombuilder": "^1.0.3"
