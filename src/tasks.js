@@ -160,6 +160,7 @@ export class Tasks {
         description
       )),
       (editableDescription = input({
+        className: "tasks-list-item-edit",
         value: staticDescription.innerText,
         hidden: true,
         onfocusout: () => editableDescription.blur(),

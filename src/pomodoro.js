@@ -41,11 +41,29 @@ export class Pomodoro {
   _createUi() {
     this._ui = div(
       makeElement("h2", "Pomodoro Timer"),
-      ((this._timerDisplay = makeElement("h3")), "0m 0s"),
+      (this._timerDisplay = makeElement("h3", "0m 0s")),
       (this._descriptionElement = div("-")),
       div(
-        (this._startStopToggle = button("Start", {
-          className: "button",
+        (this._startStopToggle = input({
+          dataset: {
+            running: false,
+          },
+          type: "button",
+          value: "Start",
+          onclick: () => {
+            const isRunning = this._startStopToggle.dataset.running === "true";
+            this._startStopToggle.value = isRunning ? "Start" : "Stop";
+            this._startStopToggle.dataset.running = !isRunning;
+            if (isRunning) {
+              clearInterval(this._interval);
+              this._intervalInput.disabled = false;
+            } else {
+              this._interval = this.startTimer(
+                Number(this._intervalInput.value)
+              );
+              this._intervalInput.disabled = true;
+            }
+          },
         }))
       ),
       (this._intervalInput = input({
@@ -56,21 +74,26 @@ export class Pomodoro {
         value: 5,
       }))
     );
+  }
 
-    // const c = new Date("July 18, 2023 23:30:20").getTime();
-    // const uiRef = this._ui;
-    // const t = setInterval(function () {
-    //   const n = new Date().getTime();
-    //   const d = c - n;
-    //   const da = Math.floor(d / (1000 * 60 * 60 * 24));
-    //   const h = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //   const m = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-    //   const s = Math.floor((d % (1000 * 60)) / 1000);
-    //   uiRef.innerText = da + "d " + h + "h " + m + "m " + s + "s ";
-    //   if (d < 0) {
-    //     clearInterval(t);
-    //     uiRef.innerText = "EXPIRED";
-    //   }
-    // }, 1000);
+  startTimer(minutes) {
+    var endDateTime = new Date();
+    endDateTime.setMinutes(endDateTime.getMinutes() + minutes);
+    console.log(endDateTime);
+    const c = endDateTime.getTime();
+    const uiRef = this._timerDisplay;
+    return setInterval(function () {
+      const n = new Date().getTime();
+      const d = c - n;
+      const da = Math.floor(d / (1000 * 60 * 60 * 24));
+      const h = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((d % (1000 * 60)) / 1000);
+      uiRef.innerText = da + "d " + h + "h " + m + "m " + s + "s ";
+      if (d < 0) {
+        clearInterval(t);
+        uiRef.innerText = "EXPIRED";
+      }
+    }, 1000);
   }
 }

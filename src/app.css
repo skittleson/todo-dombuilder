@@ -5,14 +5,19 @@ dialog {
   background-color: #171917;
   color: #ffffff;
 }
-body {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+
+@media only screen and (min-width: 800px) {
+  body {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
+
 body,
 html,
 p,
+small,
 input,
 label,
 span {
@@ -59,10 +64,12 @@ button {
   border-bottom: 1px solid #555;
 }
 .tasks-list-item,
-.tasks-list-item > input {
+.tasks-list-item-edit {
   font-size: 130%;
-  width: auto;
 }
 .tasks-list-item-focus {
   border-left: 1px solid #6a6767;
+}
+.tasks-list-item-edit {
+  width: 96%;
 }
