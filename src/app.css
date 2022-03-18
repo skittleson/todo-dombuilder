@@ -73,3 +73,25 @@ button {
 .tasks-list-item-edit {
   width: 96%;
 }
+
+.timer {
+  font-size: 200%;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.timer-button {
+  cursor: pointer;
+  border: none;
+  margin: 20px 0px 0px;
+  padding: 0px 12px;
+  border-radius: 4px;
+  box-shadow: #6a6767 0px 6px 0px;
+  font-size: 120%;
+  height: 55px;
+  color: whitesmoke;
+  font-weight: bold;
+  width: 200px;
+  background-color: #555;
+  transition: color 0.5s ease-in-out 0s;
+}

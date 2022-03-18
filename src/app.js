@@ -1,12 +1,5 @@
 import {
   a,
-  button,
-  input,
-  ul,
-  li,
-  label,
-  span,
-  p,
   div,
   makeElement,
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
@@ -33,6 +26,7 @@ const tasksInstance = new Tasks({
   externalTaskCallback: (task) => {
     pomodoroInstance.description = task.description;
     pomodoroInstance.hidden = false;
+    tasksInstance.hidden = true;
   },
 });
 function mainUi(currentItems) {
@@ -50,7 +44,8 @@ function mainUi(currentItems) {
             onclick: () => helpDialog.showModal(),
           },
           "F1 Help"
-        )
+        ),
+        makeElement("hr")
       )
     ),
     (helpDialog = infoDialogUi()),

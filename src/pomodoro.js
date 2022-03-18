@@ -1,5 +1,6 @@
 import {
   a,
+  fragment,
   button,
   input,
   ul,
@@ -12,7 +13,12 @@ import {
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
 
 export class Pomodoro {
-  constructor() {
+  constructor(
+    options = {
+      closeCallback: {},
+    }
+  ) {
+    this._options = options;
     this._createUi();
   }
 
@@ -29,6 +35,13 @@ export class Pomodoro {
 
   set hidden(value) {
     this._ui.hidden = value;
+
+    // Stop playing audio when the pomodoro timer is hidden
+    if (value) {
+      this._audio.pause();
+    } else {
+      this._startStopToggle.focus();
+    }
   }
 
   /**
@@ -40,14 +53,23 @@ export class Pomodoro {
 
   _createUi() {
     this._ui = div(
-      makeElement("h2", "Pomodoro Timer"),
-      (this._timerDisplay = makeElement("h3", "0m 0s")),
+      (this._timerDisplay = div({ className: "timer" }, "0m 0s")),
       (this._descriptionElement = div("-")),
+      (this._audio = makeElement(
+        "audio",
+        {
+          preload: "auto",
+          src: "default.mp3",
+          loop: true,
+        },
+        "Your browser does not support the audio element"
+      )),
       div(
         (this._startStopToggle = input({
           dataset: {
             running: false,
           },
+          className: "timer-button",
           type: "button",
           value: "Start",
           onclick: () => {
@@ -57,9 +79,13 @@ export class Pomodoro {
             if (isRunning) {
               clearInterval(this._interval);
               this._intervalInput.disabled = false;
+              this._audio.pause();
             } else {
               this._interval = this.startTimer(
-                Number(this._intervalInput.value)
+                Number(this._intervalInput.value),
+                () => {
+                  this._audio.play();
+                }
               );
               this._intervalInput.disabled = true;
             }
@@ -71,29 +97,33 @@ export class Pomodoro {
         step: 5,
         min: 5,
         max: 50,
-        value: 5,
+        value: 1,
       }))
     );
   }
 
-  startTimer(minutes) {
-    var endDateTime = new Date();
+  startTimer(minutes, completeCallback) {
+    const endDateTime = new Date();
     endDateTime.setMinutes(endDateTime.getMinutes() + minutes);
     console.log(endDateTime);
     const c = endDateTime.getTime();
     const uiRef = this._timerDisplay;
-    return setInterval(function () {
+    const interval = setInterval(function () {
       const n = new Date().getTime();
       const d = c - n;
-      const da = Math.floor(d / (1000 * 60 * 60 * 24));
       const h = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((d % (1000 * 60)) / 1000);
-      uiRef.innerText = da + "d " + h + "h " + m + "m " + s + "s ";
+      uiRef.innerText = `${h}h ${m}m ${s}s`;
       if (d < 0) {
-        clearInterval(t);
         uiRef.innerText = "EXPIRED";
+        clearInterval(interval);
+        if (completeCallback) {
+          completeCallback();
+        }
       }
+      document.title = uiRef.innerText;
     }, 1000);
+    return interval;
   }
 }
