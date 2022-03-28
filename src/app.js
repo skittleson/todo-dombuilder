@@ -56,8 +56,15 @@ function mainUi(currentItems) {
     if (event.key == "F1") {
       event.preventDefault();
       helpDialog.open ? helpDialog.close() : helpDialog.showModal();
+    } else if (event.key == "Escape") {
+
+      // NOTE (2022-03-28, spencerk): No prevent default here to ensure inputs are properly escaped.
+      pomodoroInstance.hidden = true;
+      tasksInstance.hidden = false;
+      tasksInstance.focus();
     }
   };
+  tasksInstance.focus();
 }
 
 function infoDialogUi() {
@@ -65,14 +72,3 @@ function infoDialogUi() {
 }
 
 mainUi(["eggs", "milk", "cheese"]);
-
-function bind(el) {
-  return {
-    set age(v) {
-      el.value = v;
-    },
-    get age() {
-      return el.value;
-    },
-  };
-}

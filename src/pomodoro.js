@@ -105,24 +105,23 @@ export class Pomodoro {
   startTimer(minutes, completeCallback) {
     const endDateTime = new Date();
     endDateTime.setMinutes(endDateTime.getMinutes() + minutes);
-    console.log(endDateTime);
-    const c = endDateTime.getTime();
-    const uiRef = this._timerDisplay;
+    const onStartNow = endDateTime.getTime();
+    const timerDisplayUiReference = this._timerDisplay;
     const interval = setInterval(function () {
-      const n = new Date().getTime();
-      const d = c - n;
+      const now = new Date().getTime();
+      const d = onStartNow - now;
       const h = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((d % (1000 * 60)) / 1000);
-      uiRef.innerText = `${h}h ${m}m ${s}s`;
+      timerDisplayUiReference.innerText = `${h}h ${m}m ${s}s`;
       if (d < 0) {
-        uiRef.innerText = "EXPIRED";
+        timerDisplayUiReference.innerText = "EXPIRED";
         clearInterval(interval);
         if (completeCallback) {
           completeCallback();
         }
       }
-      document.title = uiRef.innerText;
+      document.title = timerDisplayUiReference.innerText;
     }, 1000);
     return interval;
   }

@@ -37,6 +37,10 @@ export class Tasks {
     this._ui.hidden = value;
   }
 
+  focus() {
+    this._newTaskInput.focus();
+  }
+
   /**
    * Add tasks
    * @param {Array} tasks
