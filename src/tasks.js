@@ -1,15 +1,13 @@
 import {
-  a,
-  button,
   input,
   ul,
   li,
   label,
-  span,
-  p,
   div,
   makeElement,
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
+
+import { Storage } from "./storage.js";
 
 export class Tasks {
   /**
@@ -22,10 +20,13 @@ export class Tasks {
     }
   ) {
     this._options = options;
+    this._storage = new Storage(localStorage);
     this._ui = this._createUi();
+    // this._storage.list().forEach(item => {
+
+    // });
   }
   get ui() {
-    // this._newTaskInput.focus();
     return this._ui;
   }
 
@@ -46,11 +47,11 @@ export class Tasks {
    * @param {Array} tasks
    */
   add(tasks) {
-    if (Array.isArray(tasks) && typeof tasks[0] === "string") {
-      tasks.forEach((task) =>
-        this._tasksUl.append(this.listItemEditableComponent(task))
-      );
-    }
+    // if (Array.isArray(tasks) && typeof tasks[0] === "string") {
+    //   tasks.forEach((task) =>
+    //     this._tasksUl.append(this.listItemEditableComponent(task))
+    //   );
+    // }
   }
   _createUi() {
     let errorMsg;
@@ -110,12 +111,14 @@ export class Tasks {
    * @param {String} description
    * @returns {HTMLElement}
    */
-  listItemEditableComponent(description) {
-    let editableDescription, staticDescription, taskCheckbox, taskLi;
+  listItemEditableComponent(description, options = { id: null }) {
+    let editableDescription, staticDescription, taskCheckbox, taskLi, id;
+    options.id != null ? (id = options.id) : (id = Date.now());
+    // this._storage.add(id, { description });
     return (taskLi = li(
       {
         className: "tasks-list-item",
-        id: Math.floor(Math.random() * 110000),
+        id: id,
       },
       (taskCheckbox = input({
         type: "checkbox",
@@ -133,6 +136,7 @@ export class Tasks {
               this._options.externalTaskCallback({
                 description: staticDescription.innerText,
               });
+
               break;
             case "Enter":
               staticDescription.click();
@@ -146,6 +150,9 @@ export class Tasks {
         },
         onblur: () => {
           taskLi.classList.remove("tasks-list-item-focus");
+          // this._storage.update(id, {
+          //   description: staticDescription.innerText,
+          // });
         },
         onchange: () => {
           taskCheckbox.checked
@@ -186,8 +193,6 @@ export class Tasks {
             editableDescription.parentNode.parentNode.removeChild(
               editableDescription.parentNode
             );
-
-            //TODO: where should the focus go?
           }
         },
       }))

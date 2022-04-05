@@ -107,6 +107,7 @@ export class Pomodoro {
     endDateTime.setMinutes(endDateTime.getMinutes() + minutes);
     const onStartNow = endDateTime.getTime();
     const timerDisplayUiReference = this._timerDisplay;
+    timerDisplayUiReference.innerText = '-';
     const interval = setInterval(function () {
       const now = new Date().getTime();
       const d = onStartNow - now;

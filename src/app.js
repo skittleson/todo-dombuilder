@@ -15,6 +15,7 @@ const shortcutHowTo = `Shortcuts:
   Enter - edit task
   SPACE - toggle complete/uncompleted task
   X - delete task
+  Escape - leave input box. leave pomodoro timer.
  
  While editing a task in task list:
  Tab - Save and move to next task
@@ -65,6 +66,7 @@ function mainUi(currentItems) {
     }
   };
   tasksInstance.focus();
+  helpDialog.showModal();
 }
 
 function infoDialogUi() {
