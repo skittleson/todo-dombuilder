@@ -6,12 +6,28 @@
       content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;"
     />
     <title>Tasks</title>
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="manifest.json" />
-    <script type="module">
-      import "https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate";
-      const el = document.createElement("pwa-update");
-      document.body.appendChild(el);
+    <script>
+      if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+          console.log(
+            "[PWA Builder] active service worker found, no need to register"
+          );
+        } else {
+          // Register the service worker
+          navigator.serviceWorker
+            .register("sw.js", {
+              scope: "./",
+            })
+            .then(function (reg) {
+              console.log(
+                "[PWA Builder] Service worker has been registered for scope: " +
+                  reg.scope
+              );
+            });
+        }
+      }
     </script>
     <meta name="description" content="Tasks with a pomodoro app" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
