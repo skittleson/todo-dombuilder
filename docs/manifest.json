@@ -5,7 +5,7 @@
   "display": "standalone",
   "name": "skittleson.github",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/todo-dombuilder/",
   "short_name": "skittleson.github",
   "start_url": "/todo-dombuilder/",
   "theme_color": "#000000",
