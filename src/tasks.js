@@ -22,9 +22,13 @@ export class Tasks {
     this._options = options;
     this._storage = new Storage(localStorage);
     this._ui = this._createUi();
-    // this._storage.list().forEach(item => {
 
-    // });
+    // refresh from storage
+    this._storage.list().forEach((item) => {
+      this._tasksUl.prepend(
+        this.listItemEditableComponent(item.item.description, { id: item.key })
+      );
+    });
   }
   get ui() {
     return this._ui;
@@ -42,17 +46,6 @@ export class Tasks {
     this._newTaskInput.focus();
   }
 
-  /**
-   * Add tasks
-   * @param {Array} tasks
-   */
-  add(tasks) {
-    // if (Array.isArray(tasks) && typeof tasks[0] === "string") {
-    //   tasks.forEach((task) =>
-    //     this._tasksUl.append(this.listItemEditableComponent(task))
-    //   );
-    // }
-  }
   _createUi() {
     let errorMsg;
     return div(
@@ -114,7 +107,7 @@ export class Tasks {
   listItemEditableComponent(description, options = { id: null }) {
     let editableDescription, staticDescription, taskCheckbox, taskLi, id;
     options.id != null ? (id = options.id) : (id = Date.now());
-    // this._storage.add(id, { description });
+    this._storage.update(id, { description });
     return (taskLi = li(
       {
         className: "tasks-list-item",
@@ -136,10 +129,15 @@ export class Tasks {
               this._options.externalTaskCallback({
                 description: staticDescription.innerText,
               });
-
               break;
             case "Enter":
               staticDescription.click();
+              break;
+            case "x":
+              if (confirm(`Remove "${staticDescription.innerText}"?`)) {
+                taskLi.parentNode.removeChild(taskLi);
+                this._storage.remove(id);
+              }
               break;
             default:
               break;
@@ -150,9 +148,6 @@ export class Tasks {
         },
         onblur: () => {
           taskLi.classList.remove("tasks-list-item-focus");
-          // this._storage.update(id, {
-          //   description: staticDescription.innerText,
-          // });
         },
         onchange: () => {
           taskCheckbox.checked
@@ -187,12 +182,16 @@ export class Tasks {
 
           // Focus on the checkbox to ensure user has context of current location.
           taskCheckbox.focus();
+          this._storage.update(id, {
+            description: staticDescription.innerText,
+          });
 
           // no text, so delete it
           if (staticDescription.innerText.length == 0) {
             editableDescription.parentNode.parentNode.removeChild(
               editableDescription.parentNode
             );
+            this._storage.remove(id);
           }
         },
       }))

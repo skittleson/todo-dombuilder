@@ -30,9 +30,8 @@ const tasksInstance = new Tasks({
     tasksInstance.hidden = true;
   },
 });
-function mainUi(currentItems) {
+function mainUi() {
   pomodoroInstance.hidden = true;
-  tasksInstance.add(currentItems);
   let helpDialog;
   document.body.append(
     div(
@@ -73,4 +72,4 @@ function infoDialogUi() {
   return makeElement("dialog", makeElement("pre", shortcutHowTo));
 }
 
-mainUi(["eggs", "milk", "cheese"]);
+mainUi();

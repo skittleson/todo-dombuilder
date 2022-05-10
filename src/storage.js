@@ -9,8 +9,7 @@ export class Storage {
     this._options = options;
   }
   update(key, item) {
-    let items = this.list();
-    this.remove(key);
+    let items = this.remove(key);
     items.push({ key, item });
     this._save(items);
   }
@@ -32,18 +31,9 @@ export class Storage {
   }
   remove(key) {
     let items = this.list();
-    let removed = false;
-    items = items.filter((item) => {
-      if (item.key == key) {
-        removed = true;
-        return;
-      }
-      return item;
-    });
-    if (removed) {
-      this._save(items);
-    }
-    return removed;
+    items = items.filter(data => data.key !== key);
+    this._save(items);
+    return items;
   }
   _save(items) {
     if (Array.isArray(items)) {
