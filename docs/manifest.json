@@ -3,11 +3,10 @@
   "description": "Tasks with a pomodoro app",
   "dir": "ltr",
   "display": "standalone",
-  "name": "skittleson.github",
+  "name": "Tasks",
   "orientation": "any",
-  "scope": "/todo-dombuilder/",
-  "short_name": "skittleson.github",
-  "start_url": "/todo-dombuilder/",
+  "short_name": "Tasks",
+  "start_url": "/",
   "theme_color": "#000000",
   "icons": [
     {

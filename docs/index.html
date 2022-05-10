@@ -17,8 +17,8 @@
         } else {
           // Register the service worker
           navigator.serviceWorker
-            .register("/todo-dombuilder/sw.js", {
-              scope: "/todo-dombuilder/",
+            .register("./sw.js", {
+              scope: "/",
             })
             .then(function (reg) {
               console.log(
