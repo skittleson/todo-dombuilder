@@ -1,6 +1,6 @@
 import assert from "assert";
 import expect from "assert";
-import { Storage } from "../src/storage.mjs";
+import { Storage } from "../docs/storage.mjs";
 
 describe("Array", function () {
   describe("#indexOf()", function () {

@@ -6,7 +6,7 @@
   "module": "true",
   "scripts": {
     "test": "mocha",
-    "start": "npx http-server -c 0 --port 8095",
+    "start": "npx http-server -c 0 -o docs --port 8095",
     "estart": "electron .",
     "build": "npx electron-builder --win portable",
     "postinstall" : "node postInstall.js"
