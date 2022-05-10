@@ -1,8 +1,4 @@
-import {
-  a,
-  div,
-  makeElement,
-} from "./dombuilder.mjs";
+import { a, div, makeElement } from "./dombuilder.mjs";
 import { Pomodoro } from "./pomodoro.mjs";
 import { Tasks } from "./tasks.mjs";
 const shortcutHowTo = `Shortcuts:
@@ -57,8 +53,12 @@ function mainUi() {
       event.preventDefault();
       helpDialog.open ? helpDialog.close() : helpDialog.showModal();
     } else if (event.key == "Escape") {
-
       // NOTE (2022-03-28, spencerk): No prevent default here to ensure inputs are properly escaped.
+      if (pomodoroInstance.isRunning) {
+        if (!confirm("Stop timer for current task?")) {
+          return;
+        }
+      }
       pomodoroInstance.hidden = true;
       tasksInstance.hidden = false;
       tasksInstance.focus();

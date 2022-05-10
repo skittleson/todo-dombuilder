@@ -1,8 +1,4 @@
-import {
-  input,
-  div,
-  makeElement,
-} from "./dombuilder.mjs";
+import { input, div, makeElement } from "./dombuilder.mjs";
 
 export class Pomodoro {
   constructor(
@@ -36,6 +32,14 @@ export class Pomodoro {
     }
   }
 
+  get isRunning() {
+    return this._startStopToggle.dataset.running === "true";
+  }
+
+  set isRunning(value) {
+    this._startStopToggle.dataset.running = value;
+  }
+
   /**
    * @param {String} value
    */
@@ -65,10 +69,9 @@ export class Pomodoro {
           type: "button",
           value: "Start",
           onclick: () => {
-            const isRunning = this._startStopToggle.dataset.running === "true";
-            this._startStopToggle.value = isRunning ? "Start" : "Stop";
-            this._startStopToggle.dataset.running = !isRunning;
-            if (isRunning) {
+            this._startStopToggle.value = this.isRunning ? "Start" : "Stop";
+
+            if (this.isRunning) {
               clearInterval(this._interval);
               this._intervalInput.disabled = false;
               this._audio.pause();
@@ -81,6 +84,7 @@ export class Pomodoro {
               );
               this._intervalInput.disabled = true;
             }
+            this.isRunning = !this.isRunning;
           },
         })),
         (this._intervalInput = input({
