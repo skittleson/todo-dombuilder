@@ -1,5 +1,4 @@
-# Allow this one file to be present for the web ui
-!node_modules/@kanmf/dombuilder/index.mjs
+node_modules/*
 
 dist
 
@@ -43,7 +42,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files

@@ -2,7 +2,7 @@ import {
   a,
   div,
   makeElement,
-} from "../node_modules/@kanmf/dombuilder/index.mjs";
+} from "./dombuilder.mjs";
 import { Pomodoro } from "./pomodoro.mjs";
 import { Tasks } from "./tasks.mjs";
 const shortcutHowTo = `Shortcuts:

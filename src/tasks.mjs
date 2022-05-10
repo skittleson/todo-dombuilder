@@ -5,7 +5,7 @@ import {
   label,
   div,
   makeElement,
-} from "../node_modules/@kanmf/dombuilder/index.mjs";
+} from "./dombuilder.mjs";
 
 import { Storage } from "./storage.mjs";
 

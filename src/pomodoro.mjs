@@ -2,7 +2,7 @@ import {
   input,
   div,
   makeElement,
-} from "../node_modules/@kanmf/dombuilder/index.mjs";
+} from "./dombuilder.mjs";
 
 export class Pomodoro {
   constructor(
