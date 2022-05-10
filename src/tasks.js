@@ -161,6 +161,7 @@ export class Tasks {
             staticDescription.hidden = true;
             editableDescription.hidden = false;
             editableDescription.focus();
+            editableDescription.select();
           },
         },
         description

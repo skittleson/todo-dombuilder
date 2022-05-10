@@ -90,15 +90,16 @@ export class Pomodoro {
               this._intervalInput.disabled = true;
             }
           },
+        })),
+        (this._intervalInput = input({
+          classList: "time-selector",
+          type: "number",
+          step: 5,
+          min: 5,
+          max: 50,
+          value: 5,
         }))
-      ),
-      (this._intervalInput = input({
-        type: "number",
-        step: 5,
-        min: 5,
-        max: 50,
-        value: 1,
-      }))
+      )
     );
   }
 
@@ -107,7 +108,7 @@ export class Pomodoro {
     endDateTime.setMinutes(endDateTime.getMinutes() + minutes);
     const onStartNow = endDateTime.getTime();
     const timerDisplayUiReference = this._timerDisplay;
-    timerDisplayUiReference.innerText = '-';
+    timerDisplayUiReference.innerText = "-";
     const interval = setInterval(function () {
       const now = new Date().getTime();
       const d = onStartNow - now;

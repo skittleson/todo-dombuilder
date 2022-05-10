@@ -95,3 +95,7 @@ button {
   background-color: #555;
   transition: color 0.5s ease-in-out 0s;
 }
+.time-selector {
+  font-size: 200%;
+  margin-left: 1%;
+}
