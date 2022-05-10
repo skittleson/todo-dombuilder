@@ -7,7 +7,7 @@ import {
   makeElement,
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
 
-import { Storage } from "./storage.js";
+import { Storage } from "./storage.mjs";
 
 export class Tasks {
   /**

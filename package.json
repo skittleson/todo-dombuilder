@@ -3,8 +3,9 @@
   "version": "1.0.2",
   "description": "keyboard friendly todo pomodoro app",
   "main": "index.js",
+  "module": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "npx http-server -c 0 --port 8095",
     "estart": "electron .",
     "build": "npx electron-builder --win portable"
@@ -15,6 +16,7 @@
     "@kanmf/dombuilder": "^1.0.3"
   },
   "devDependencies": {
-    "electron": "^17.1.1"
+    "electron": "^17.1.1",
+    "mocha": "^10.0.0"
   }
 }

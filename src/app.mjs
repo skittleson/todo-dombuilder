@@ -3,8 +3,8 @@ import {
   div,
   makeElement,
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
-import { Pomodoro } from "./pomodoro.js";
-import { Tasks } from "./tasks.js";
+import { Pomodoro } from "./pomodoro.mjs";
+import { Tasks } from "./tasks.mjs";
 const shortcutHowTo = `Shortcuts:
  While writing a task:
  Tab - Move to task list below
