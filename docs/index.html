@@ -18,7 +18,7 @@
           // Register the service worker
           navigator.serviceWorker
             .register("/todo-dombuilder/sw.js", {
-              scope: "./",
+              scope: "https://skittleson.github.io/todo-dombuilder/",
             })
             .then(function (reg) {
               console.log(
