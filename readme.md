@@ -1,8 +1,8 @@
-# ToDo App using dombuilder
+# ToDo with Pomodoro App
 
 ## Project Goals
 
 - [x] Keyboard friendly
 - [x] Desktop friendly
-- [] Pomodoro for tasks
+- [x] Pomodoro for tasks
 - [] Web friendly https://skittleson.github.io/todo-dombuilder

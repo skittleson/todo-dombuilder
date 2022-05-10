@@ -1,3 +1,6 @@
+# Allow this one file to be present for the web ui
+!node_modules/@kanmf/dombuilder/index.mjs
+
 dist
 
 # Logs
