@@ -1,13 +1,5 @@
 import {
-  a,
-  fragment,
-  button,
   input,
-  ul,
-  li,
-  label,
-  span,
-  p,
   div,
   makeElement,
 } from "../node_modules/@kanmf/dombuilder/index.mjs";
