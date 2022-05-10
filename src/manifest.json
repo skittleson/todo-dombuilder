@@ -1,13 +1,12 @@
 {
-    "name": "Tasks",
-    "short_name": "Tasks",
-    "start_url": "/",
-    "scope_url": "/",
+    "background_color": "#ffffff",
+    "description": "Tasks with a pomodoro app",
+    "dir": "ltr",
     "display": "standalone",
-    "background_color": "#fdfdfd",
-    "theme_color": "#0d452a",
-    "orientation": "portrait-primary",
-    "icons": [
-      
-    ]
+    "name": "skittleson.github",
+    "orientation": "any",
+    "scope": "/",
+    "short_name": "skittleson.github",
+    "start_url": "/",
+    "theme_color": "#ffffff"
   }

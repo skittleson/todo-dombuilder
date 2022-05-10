@@ -1,6 +1,6 @@
 {
   "name": "todo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "keyboard friendly todo pomodoro app",
   "main": "index.js",
   "module": "true",
