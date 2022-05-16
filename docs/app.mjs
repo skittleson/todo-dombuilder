@@ -4,18 +4,20 @@ import { Tasks } from "./tasks.mjs";
 const shortcutHowTo = `Shortcuts:
  While writing a task:
  Tab - Move to task list below
+ Enter - Add to task list below
 
  While on task in task list:
+  Tab/DownArrow - Select next task
+  Shift Tab/UpArrow - Select previous task 
   W - move task up
   S - move task down
   Enter - edit task
   SPACE - toggle complete/uncompleted task
-  X - delete task
+  X / Delete key - delete task
+  D - enter pomodoro timer.
+  C - copy task
   Escape - leave input box. leave pomodoro timer.
- 
- While editing a task in task list:
- Tab - Save and move to next task
- Shift Tab - Save and move to previous task
+  
   `;
 
 const pomodoroInstance = new Pomodoro();

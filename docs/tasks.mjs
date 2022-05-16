@@ -1,11 +1,4 @@
-import {
-  input,
-  ul,
-  li,
-  label,
-  div,
-  makeElement,
-} from "./dombuilder.mjs";
+import { input, ul, li, label, div, makeElement } from "./dombuilder.mjs";
 
 import { Storage } from "./storage.mjs";
 
@@ -117,6 +110,12 @@ export class Tasks {
         type: "checkbox",
         onkeydown: (keyPressDownEvent) => {
           switch (keyPressDownEvent.key) {
+            case "ArrowUp":
+              taskLi.previousSibling.firstChild.focus();
+              break;
+            case "ArrowDown":
+              taskLi.nextSibling.firstChild.focus();
+              break;
             case "w":
               taskLi.previousSibling.before(taskLi);
               taskLi.firstChild.focus();
@@ -133,6 +132,12 @@ export class Tasks {
             case "Enter":
               staticDescription.click();
               break;
+            case "c":
+              this._tasksUl.prepend(
+                this.listItemEditableComponent(`Copy ${staticDescription.innerText}`)
+              );
+              break;
+            case "Delete":
             case "x":
               if (confirm(`Remove "${staticDescription.innerText}"?`)) {
                 taskLi.parentNode.removeChild(taskLi);
