@@ -130,16 +130,28 @@ export class Tasks {
               });
               break;
             case "Enter":
+              this._tasksUl.childNodes.forEach((child) => {
+                child.firstChild.blur();
+              });
               staticDescription.click();
               break;
             case "c":
               this._tasksUl.prepend(
-                this.listItemEditableComponent(`Copy ${staticDescription.innerText}`)
+                this.listItemEditableComponent(
+                  `Copy ${staticDescription.innerText}`
+                )
               );
               break;
             case "Delete":
             case "x":
               if (confirm(`Remove "${staticDescription.innerText}"?`)) {
+                if (taskLi.nextSibling != null) {
+                  taskLi.nextSibling.firstChild.focus();
+                } else if (taskLi.previousSibling != null) {
+                  taskLi.previousSibling.firstChild.focus();
+                } else {
+                  this._newTaskInput.focus();
+                }
                 taskLi.parentNode.removeChild(taskLi);
                 this._storage.remove(id);
               }
