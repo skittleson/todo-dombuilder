@@ -92,6 +92,7 @@ export class Tasks {
       })
     );
   }
+
   /**
    * One way binding of span and input text box
    * @param {String} description
@@ -145,6 +146,8 @@ export class Tasks {
             case "Delete":
             case "x":
               if (confirm(`Remove "${staticDescription.innerText}"?`)) {
+                
+                // bring focus to next task
                 if (taskLi.nextSibling != null) {
                   taskLi.nextSibling.firstChild.focus();
                 } else if (taskLi.previousSibling != null) {
@@ -152,6 +155,8 @@ export class Tasks {
                 } else {
                   this._newTaskInput.focus();
                 }
+
+                // remove task!
                 taskLi.parentNode.removeChild(taskLi);
                 this._storage.remove(id);
               }
@@ -170,6 +175,11 @@ export class Tasks {
           taskCheckbox.checked
             ? (taskLi.style.textDecoration = "line-through")
             : (taskLi.style.textDecoration = "none");
+          
+          // Move task to end of the list
+          if (taskCheckbox.checked) {
+            taskLi.parentNode.lastChild.after(taskLi);
+          }
         },
       })),
       (staticDescription = label(
