@@ -112,10 +112,14 @@ export class Tasks {
         onkeydown: (keyPressDownEvent) => {
           switch (keyPressDownEvent.key) {
             case "ArrowUp":
-              taskLi.previousSibling.firstChild.focus();
+              if (taskLi.previousSibling != null) {
+                taskLi.previousSibling.firstChild.focus();
+              }
               break;
             case "ArrowDown":
-              taskLi.nextSibling.firstChild.focus();
+              if (taskLi.nextSibling != null) {
+                taskLi.nextSibling.firstChild.focus();
+              }
               break;
             case "w":
               taskLi.previousSibling.before(taskLi);
@@ -146,7 +150,6 @@ export class Tasks {
             case "Delete":
             case "x":
               if (confirm(`Remove "${staticDescription.innerText}"?`)) {
-                
                 // bring focus to next task
                 if (taskLi.nextSibling != null) {
                   taskLi.nextSibling.firstChild.focus();
@@ -175,9 +178,14 @@ export class Tasks {
           taskCheckbox.checked
             ? (taskLi.style.textDecoration = "line-through")
             : (taskLi.style.textDecoration = "none");
-          
-          // Move task to end of the list
+
           if (taskCheckbox.checked) {
+            if (taskLi.previousSibling != null) {
+              taskLi.previousSibling.firstChild.focus();
+            } else {
+              this._newTaskInput.focus();
+            }
+            // Move task to end of the list
             taskLi.parentNode.lastChild.after(taskLi);
           }
         },
