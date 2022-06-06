@@ -23,7 +23,7 @@ const shortcutHowTo = `Shortcuts:
 const pomodoroInstance = new Pomodoro();
 const tasksInstance = new Tasks({
   externalTaskCallback: (task) => {
-    pomodoroInstance.description = task.description;
+    pomodoroInstance.description(task.id, task.description);
     pomodoroInstance.hidden = false;
     tasksInstance.hidden = true;
   },

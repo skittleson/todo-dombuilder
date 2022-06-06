@@ -132,6 +132,7 @@ export class Tasks {
             case "d":
               this._options.externalTaskCallback({
                 description: staticDescription.innerText,
+                id: id
               });
               break;
             case "Enter":

@@ -8,7 +8,7 @@
     "test": "mocha",
     "start": "cd docs && npx http-server -c 0 --port 8095",
     "estart": "electron .",
-    "build": "npx electron-builder --win portable",
+    "release": "npx electron-builder --win portable",
     "postinstall" : "node postInstall.js"
   },
   "author": "Spencer Kittleson",

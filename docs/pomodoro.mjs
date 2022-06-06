@@ -1,4 +1,5 @@
 import { input, div, makeElement } from "./dombuilder.mjs";
+import { Storage } from "./storage.mjs";
 
 export class Pomodoro {
   constructor(
@@ -7,6 +8,7 @@ export class Pomodoro {
     }
   ) {
     this._options = options;
+    this._storage = new Storage(localStorage, { locationName: "taskNotes" });
     this._createUi();
   }
 
@@ -40,11 +42,14 @@ export class Pomodoro {
     this._startStopToggle.dataset.running = value;
   }
 
-  /**
-   * @param {String} value
-   */
-  set description(value) {
-    this._descriptionElement.innerText = value;
+  description(id, description) {
+    this._notesTextarea.value = "";
+    this._descriptionElement.innerText = description;
+    this._descriptionElement.dataset.id = id;
+    const taskNotes = this._storage.get(id);
+    if(taskNotes){
+      this._notesTextarea.value = taskNotes;
+    }
   }
 
   _createUi() {
@@ -95,7 +100,17 @@ export class Pomodoro {
           max: 50,
           value: 5,
         }))
-      )
+      ),
+      (this._notesTextarea = makeElement("textarea", {
+        className: "notes",
+        placeholder: "write on-going notes",
+        onkeydown: () => {
+          this._storage.update(
+            Number(this._descriptionElement.dataset.id),
+            this._notesTextarea.value
+          );
+        },
+      }))
     );
   }
 

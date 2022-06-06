@@ -2,7 +2,7 @@ export class Storage {
   constructor(
     storage,
     options = {
-      listName: "tasks",
+      locationName: "tasks",
     }
   ) {
     this._storage = storage;
@@ -19,25 +19,30 @@ export class Storage {
     this._save(items);
   }
   list() {
-    let items = JSON.parse(this._storage.getItem(this._options.listName));
+    let items = JSON.parse(this._storage.getItem(this._options.locationName));
     if (items == undefined || !Array.isArray(items)) {
       this.removeAll();
       items = [];
     }
     return items;
   }
+  get(key) {
+    return this.list().find((item) => {
+      item.key == key;
+    });
+  }
   removeAll() {
     this._save([]);
   }
   remove(key) {
     let items = this.list();
-    items = items.filter(data => data.key !== key);
+    items = items.filter((data) => data.key !== key);
     this._save(items);
     return items;
   }
   _save(items) {
     if (Array.isArray(items)) {
-      this._storage.setItem(this._options.listName, JSON.stringify(items));
+      this._storage.setItem(this._options.locationName, JSON.stringify(items));
     }
   }
 }
