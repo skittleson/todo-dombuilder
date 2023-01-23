@@ -18,7 +18,10 @@ const shortcutHowTo = `Shortcuts:
   C - copy task
   Escape - leave input box. leave pomodoro timer.
   
-  `;
+ Global commands
+   Tab + UpArrow - expands window to full size
+   Tab + DownArrow - makes window smaller
+`;
 
 const pomodoroInstance = new Pomodoro();
 const tasksInstance = new Tasks({
