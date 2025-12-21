@@ -1,9 +1,9 @@
-/*https://www.color-hex.com/color-palette/2609*/
+/* Dracula Theme */
 body,
 html,
 dialog {
-  background-color: #171917;
-  color: #ffffff;
+  background-color: #282a36;
+  color: #f8f8f2;
 }
 
 @media only screen and (min-width: 800px) {
@@ -24,11 +24,42 @@ span {
   font-family: "Inconsolata", monospace;
 }
 
-input {
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: groove;
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #6272a4;
+  border-radius: 4px;
+  background-color: #44475a;
+  cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #50fa7b;
+  border-color: #50fa7b;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #282a36;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #bd93f9;
+  transform: scale(1.1);
+}
+
+input:not([type="checkbox"]) {
+  border: 1px solid #6272a4;
 }
 
 input:focus {
@@ -37,8 +68,9 @@ input:focus {
 
 input,
 button {
-  background-color: #171917;
-  color: white;
+  background-color: #44475a;
+  color: #f8f8f2;
+  border: 1px solid #6272a4;
 }
 .help-link {
   float: right;
@@ -61,14 +93,14 @@ button {
 }
 .tasks-list-item {
   padding-top: 1%;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #6272a4;
 }
 .tasks-list-item,
 .tasks-list-item-edit {
   font-size: 130%;
 }
 .tasks-list-item-focus {
-  border-left: 1px solid #6a6767;
+  border-left: 1px solid #bd93f9;
 }
 .tasks-list-item-edit {
   width: 96%;
@@ -82,26 +114,32 @@ button {
 
 .timer-button {
   cursor: pointer;
-  border: none;
+  border: 1px solid #6272a4;
   margin: 20px 0px 0px;
   padding: 0px 12px;
   border-radius: 4px;
-  box-shadow: #6a6767 0px 6px 0px;
+  box-shadow: #bd93f9 0px 6px 0px;
   font-size: 120%;
   height: 55px;
-  color: whitesmoke;
+  color: #f8f8f2;
   font-weight: bold;
   width: 200px;
-  background-color: #555;
+  background-color: #44475a;
   transition: color 0.5s ease-in-out 0s;
+}
+
+.timer-button:hover {
+  background-color: #6272a4;
+  border-color: #bd93f9;
 }
 .time-selector {
   font-size: 200%;
   margin-left: 1%;
 }
 .notes {
-  background-color: #202020; 
-  color: white;
+  background-color: #44475a; 
+  color: #f8f8f2;
+  border: 1px solid #6272a4;
   max-width: 800px;
   width: 100%;
   min-height: 600px;

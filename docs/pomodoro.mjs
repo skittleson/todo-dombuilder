@@ -8,7 +8,11 @@ export class Pomodoro {
     }
   ) {
     this._options = options;
-    this._storage = new Storage(localStorage, { locationName: "taskNotes" });
+    const isElectron = typeof window !== 'undefined' && window.electronAPI;
+    this._storage = new Storage(localStorage, { 
+      locationName: "taskNotes",
+      useFileStorage: isElectron 
+    });
     this._createUi();
   }
 

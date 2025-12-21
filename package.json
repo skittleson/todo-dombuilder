@@ -5,18 +5,20 @@
   "main": "index.js",
   "module": "true",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --require test/setup.mjs",
     "start": "cd docs && npx http-server -c 0 --port 8095",
     "estart": "electron .",
     "release": "npx electron-builder --win portable",
-    "postinstall" : "node postInstall.js"
+    "postinstall": "node postInstall.js"
   },
   "author": "Spencer Kittleson",
   "license": "ISC",
   "dependencies": {
-    "@kanmf/dombuilder": "^1.0.3"
+    "@kanmf/dombuilder": "^1.0.3",
+    "jsdom": "^27.3.0"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
     "electron": "^17.1.1",
     "mocha": "^10.0.0"
   }
